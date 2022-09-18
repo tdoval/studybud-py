@@ -74,8 +74,9 @@ def home(request):
 
     topics = Topic.objects.all()
     room_count = rooms.count()
+    room_messages = Message.objects.filter(Q(room__topic__name__icontains=q))
 
-    context = {'rooms': rooms, 'topics':topics, 'room_count':room_count}
+    context = {'rooms': rooms, 'topics':topics, 'room_count':room_count,'room_messages':room_messages}
     return render(request, 'base/home.html', context)
 
 
@@ -95,6 +96,12 @@ def room(request, pk):
 
     context = {'room': room, 'room_messages': room_messages, 'participants':participants}
     return render(request, 'base/room.html', context)
+
+def userProfile(request, pk):
+    user = User.objects.get(id=pk)
+
+    context = {'user':user}
+    return render(request, 'base/profile.html', context)
 
 @login_required(login_url='login')
 def createRoom(request):
