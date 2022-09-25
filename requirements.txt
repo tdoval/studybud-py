@@ -7,3 +7,4 @@ python-decouple==3.6
 sqlparse==0.4.2
 tzdata==2022.2
 virtualenv==20.16.5
+django-cors-headers==3.8.0
